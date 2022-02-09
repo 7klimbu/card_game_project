@@ -1,7 +1,0 @@
-admin password 
-rilmar cat123 
-razerdrago test 
-test123 pass 
-test4654654 pass 
-test7080608 pass  
-test456345 password
