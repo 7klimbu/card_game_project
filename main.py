@@ -129,30 +129,30 @@ def startGame():
 
                 # evaluating cards
                 # red beats black, black beats yellow, yellow beats red
-                colours = ["red", "black", "yellow"]
-                card1Colour = player1Card.color
-                card2Colour = player2Card.color
+                # colors = ["red", "black", "yellow"]
+                card1Color = player1Card.color
+                card2Color = player2Card.color
         
-                if card1Colour != card2Colour: 
+                if card1Color != card2Color: 
                         # compare colours if they aren't the same
-                        if card1Colour == "yellow":
-                                if card2Colour == "black":
+                        if card1Color == "yellow":
+                                if card2Color == "black":
                                         print("PLAYER 2 WINS")
                                         player2Points += 1
                                 else:
                                         print("PLAYER 1 WINS")
                                         player1Points += 1
 
-                        if card1Colour == "black":
-                                if card2Colour == "red":
+                        if card1Color == "black":
+                                if card2Color == "red":
                                         print("PLAYER 2 WINS")
                                         player2Points += 1
                                 else:
                                         print("PLAYER 1 WINS")
                                         player1Points += 1
 
-                        if card1Colour == "red":
-                                if card2Colour == "yellow":
+                        if card1Color == "red":
+                                if card2Color == "yellow":
                                         print("PLAYER 2 WINS")
                                         player2Points += 1
                                 else:
