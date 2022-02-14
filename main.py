@@ -97,8 +97,10 @@ def startGame():
         player2Points = 0
 
         timeGameWasBegun = time.time()
-
+        
+        # game loop
         def startRound():
+                # setup variables
                 nonlocal turn, player1Points, player2Points
                 
                 player1Card = None
