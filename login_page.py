@@ -116,7 +116,7 @@ def textContainsLetters(txt):
      if txt == "":
           return False
 
-     # count number of unique letters in the password
+     # count number of unique letters in the txt
      lettersUsed = {" "}
 
      for x in txt:
