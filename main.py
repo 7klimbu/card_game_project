@@ -134,7 +134,7 @@ def startGame():
                 card2Color = player2Card.color
         
                 if card1Color != card2Color: 
-                        # compare colours if they aren't the same
+                        # compare colour of each if they aren't the same
                         if card1Color == "yellow":
                                 if card2Color == "black":
                                         print("PLAYER 2 WINS")
@@ -160,7 +160,7 @@ def startGame():
                                         player1Points += 1
                         print("BY COLOUR")
                 else:
-                        # compare numbers (bigger one wins)
+                        # otherwise compare numbers (bigger one wins)
                         if player1Card.number > player2Card.number:
                                 print("PLAYER 1 WINS")
                                 player1Points += 1
