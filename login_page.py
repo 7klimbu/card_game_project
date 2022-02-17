@@ -21,17 +21,24 @@ def selectOptions(playerNumber):
         choices = ["1", "2"]
         choice = input("(1) Enter Login, (2) Make an Account >> ")
         
+        # execute selected choice
         if choice == "1":
                 user = validateLogin()
                 if user == "unsuccessful":
+                    # user could not be retrieved
                     return None
                 else:
+                    # user was retrieved
                     return user
         if choice == "2":
             user = createAccount()
+        
+            # return the newly created account or "None" if making the account caused an error
             return user
 
         if not choice in choices:
+            # input is invalid, user could not be retrieved
+        
             print("ERRROR INVALID COMMAND")
             print("")
 
@@ -62,7 +69,7 @@ def checkUserPassword(username):
 
      # return user's password if the user exists, otherwise return nothing     
      for record in user_records.readlines():
-          # loginInfo (username, password)
+          # loginInfo contains the following: (username, password)
           loginInfo = record.split(" ")
 
           if loginInfo[0] == username:
@@ -85,7 +92,11 @@ def createAccount():
                 # write login info to the server
                 user_records = open("user_records.txt", "a")
                 user_records.write(" " + "\n")
+                
+                # formatting login info as a readable string
                 format_logininfo = username + " " + password
+                
+                # storing info in the "server"
                 user_records.write(format_logininfo)
                 user_records.close()
 
@@ -103,7 +114,7 @@ def usernameIsInUse(username):
      user_records = open("user_records.txt", "r")
      
      for record in user_records.readlines():
-          # loginInfo (username, password)
+          # loginInfo contains the following: (username, password)
           loginInfo = record.split(" ")
           
           if loginInfo[0] == username:
@@ -112,11 +123,14 @@ def usernameIsInUse(username):
      return False
 
 
+# checking whether username/password isn't blank
 def textContainsLetters(txt):
      if txt == "":
+          # txt literally has no characters
           return False
 
-     # count number of unique letters in the txt
+     # count number of unique letters in the txt, excluding " " which is already counted
+     # (tuples cannot store duplicate values)
      lettersUsed = {" "}
 
      for x in txt:
