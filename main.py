@@ -7,15 +7,16 @@ import datetime
 print("WELCOME TO THE COLOR CARD GAME")
 print("CAN 2 PLAYERS LOGIN TO THE SYSTEM?")
 
-# sample login info:
-# username: admin, password: password
-# username: rilmar, password: cat123
-
+# asking both players to login
 player1 = login_page.showLoginScreen(1)
 login_page.loggedInPlayers.append(player1)
 
 player2 = login_page.showLoginScreen(2)
 login_page.loggedInPlayers.append(player2)
+
+# sample login info for testing:
+# username: admin, password: password
+# username: rilmar, password: cat123
 
 
 # title screen
@@ -23,7 +24,8 @@ def mainMenu():
         print("")
         choices = ["1", "2", "3"]
         choice = input("(1) PLAY A MATCH, (2) CHECK PAST GAME RECORDS, (3) HOW TO PLAY >> ")
-
+        
+        # execute different options
         if choice == "1":
                 startGame()
 
@@ -61,6 +63,7 @@ def mainMenu():
 
 # card game
 def startGame():
+        # define all card colors needed
         colors = ["red", "black", "yellow"]
         deck = []
 
@@ -76,10 +79,12 @@ def startGame():
                         deck.append(Card(color, x))
 
 
-        # randomizing deck
+        # randomizing deck:
+        # making new deck to keep random cards
         randomizeDeck = []
 
         while len(deck) != 0:
+                # pick a random card, add it to the "random" deck, then destroy it from the old deck
                 getCard = random.choice(deck)
                 randomizeDeck.append(getCard)
                 deck.pop(deck.index(getCard))
@@ -91,7 +96,8 @@ def startGame():
         print("")
         print("GAME RULES:")
         print("RED > BLACK > YELLOW >")
-
+        
+        # setup game variables
         turn = 0
         player1Points = 0
         player2Points = 0
@@ -100,7 +106,7 @@ def startGame():
         
         # game loop
         def startRound():
-                # setup variables
+                # setup turn variables
                 nonlocal turn, player1Points, player2Points
                 
                 player1Card = None
@@ -111,32 +117,40 @@ def startGame():
                 print("")
                 print("TURN:", turn)
                 
-                # each player picks a random card
+                # both players pick cards:
+                # player 1 picks a random card from the deck
                 print("PLAYER 1 CHOOSE FROM THE TOP OR THE BOTTOM OF THE DECK")
                 input("(1) TOP, (2) BOTTOM >> ")
                 
                 player1Card = random.choice(deck)                
                 deck.remove(player1Card)
-
+                
+                # announce the random card
                 print("PLAYER 2 CHOOSE FROM THE TOP OR THE BOTTOM OF THE DECK")
                 input("(1) TOP, (2) BOTTOM >> ")
                 print("")
                 
+                
+                # player 2 picks a random card from the deck
                 player2Card = random.choice(deck)
                 deck.remove(player2Card)
-
+                
+                # announce the random card
                 print("PLAYER 1 HAS PICKED", player1Card.color, player1Card.number)
                 print("PLAYER 2 HAS PICKED", player2Card.color, player2Card.number)
                 print("")
 
+                
                 # evaluating cards
-                # red beats black, black beats yellow, yellow beats red
-                # colors = ["red", "black", "yellow"]
+                # colors = red, black and yellow
+                # color values: red beats black, black beats yellow, yellow beats red
                 card1Color = player1Card.color
                 card2Color = player2Card.color
-        
+                
+                # compare color of each if they aren't the same, otherwise compare their numbers
+                # better color or higher number wins
                 if card1Color != card2Color: 
-                        # compare colour of each if they aren't the same
+                        # comparing colours...
                         if card1Color == "yellow":
                                 if card2Color == "black":
                                         print("PLAYER 2 WINS")
@@ -162,7 +176,7 @@ def startGame():
                                         player1Points += 1
                         print("BY COLOUR")
                 else:
-                        # otherwise compare numbers (bigger one wins)
+                        # comparing numbers...
                         if player1Card.number > player2Card.number:
                                 print("PLAYER 1 WINS")
                                 player1Points += 1
@@ -180,6 +194,8 @@ def startGame():
         # record how long the game lasted
         timeGameWasEnded = time.time()
         timeGameLasted = round(timeGameWasEnded - timeGameWasBegun)
+        
+        # format this into a readable string
         timeGameLasted = str(timeGameLasted) + " seconds"
 
         # decide the winner
@@ -188,15 +204,18 @@ def startGame():
         time.sleep(1)
 
         winner = None
-
+        
         if player1Points == player2Points:
+                # player points are equal
                 print("THE GAME WAS A TIE")
                 winner = "Tie"
         else:
                 if player1Points > player2Points:
+                        # player 1 has more points
                         print("PLAYER 1 WINS THE GAME")
                         winner = player1 + " was the winner"
                 else:
+                        # player 2 has more points
                         print("PLAYER 2 WINS THE GAME")
                         winner = player2 + " was the winner"
 
@@ -206,7 +225,7 @@ def startGame():
         past_games_count = len(past_games.readlines())
         past_games.close()
 
-        # format the current time as a string
+        # format the current time as a readable string
         x = datetime.datetime.now()
         timeFormat =str(x.day) + "/" + str(x.month) + "/" + str(x.year) + " " + "(" + str(x.hour) + ":" + str(x.minute) + ")"
 
