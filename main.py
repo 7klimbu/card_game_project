@@ -58,6 +58,7 @@ def mainMenu():
         if not choice in choices:
                 print("ERROR: INVALID COMMAND!")
                 print("")
+                # let the user retry
                 mainMenu()
 
 
@@ -67,13 +68,13 @@ def startGame():
         colors = ["red", "black", "yellow"]
         deck = []
 
-        # create 4 colored decks that each contain 10 cards
+        # card object to store color and number values
         class Card:
             def __init__(self, color, number):
                 self.color = color
                 self.number = number
 
-        
+        # create 4 colored decks that each contain 10 cards
         for color in colors:
                 for x in range(1, 10 + 1):
                         deck.append(Card(color, x))
@@ -89,7 +90,7 @@ def startGame():
                 randomizeDeck.append(getCard)
                 deck.pop(deck.index(getCard))
 
-
+        # replace the normal deck with the random one
         deck = randomizeDeck
 
         # defining rules
@@ -104,7 +105,7 @@ def startGame():
 
         timeGameWasBegun = time.time()
         
-        # game loop
+        # defines how turns should be played out in a loop
         def startRound():
                 # setup turn variables
                 nonlocal turn, player1Points, player2Points
@@ -198,13 +199,14 @@ def startGame():
         # format this into a readable string
         timeGameLasted = str(timeGameLasted) + " seconds"
 
-        # decide the winner
+        # pause when announcing the winner for dramatic effect
         print("")
         print("THE RESULTS OF THE GAME ARE...")
         time.sleep(1)
 
         winner = None
         
+        # decide the winner
         if player1Points == player2Points:
                 # player points are equal
                 print("THE GAME WAS A TIE")
