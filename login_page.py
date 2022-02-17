@@ -87,6 +87,8 @@ def createAccount():
 
                 if textContainsLetters(password) == False:
                      print("ERROR: PASSWORD NEEDS TO BE MADE UP OF LETTERS, NUMBERS OR SYMBOLS!!!")
+                
+                     # user could not be retrieved, no account was actually made
                      return None
                 
                 # write login info to the server
